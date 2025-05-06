@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { transformWithEsbuild } from "vite";
 
 const userSchema = new mongoose.Schema(
   {
