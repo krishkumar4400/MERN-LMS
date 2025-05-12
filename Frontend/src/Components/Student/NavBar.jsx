@@ -3,13 +3,38 @@ import { assets } from "../../assets/assets/assets.js";
 import { Link } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { AppContext } from "../../Context/AppContext.jsx";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const NavBar = () => {
   const { openSignIn } = useClerk();
   const { user } = useUser();
-  const {navigate, isEducator, setIsEducator} = useContext(AppContext);
+  const {navigate, isEducator, setIsEducator, backendUrl, getToken} = useContext(AppContext);
 
   const isCourseListPage = location.pathname.includes("/course-list");
+
+  const becomeEducator = async () => {
+    try {
+      if(isEducator) {
+        navigate('/educator');
+        return;
+      }
+
+      const token = await getToken();
+      const {data} = await axios.get(backendUrl + '/api/educator/update-role', {headers:{Authorization: `Bearer ${token}`}});
+
+      if(data.success) {
+        setIsEducator(true);
+        toast.success(data.message);
+      }
+      else {
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <div
@@ -24,7 +49,7 @@ const NavBar = () => {
           {user && (
             <>
               <button
-              onClick={() => navigate('/educator')}
+              onClick={becomeEducator}
                className="cursor-pointer">{isEducator ? "Educator Dashboard" : "Become Educator"}</button>|{" "}
               <Link to="/my-enrollments">My Enrollments</Link>
             </>
@@ -48,7 +73,7 @@ const NavBar = () => {
           {user && (
             <>
                <button
-              onClick={() => navigate('/educator')}
+              onClick={becomeEducator}
                className="cursor-pointer">{isEducator ? "Educator Dashboard" : "Become Educator"}</button> |{" "}
               <Link to="/my-enrollments">My Enrollments</Link>
             </>
