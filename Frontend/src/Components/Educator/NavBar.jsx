@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <div className='flex items-center justify-between px-4 md:px-8 border-b border-gray-500 py-3'>
       <Link to='/'>
-      <img src={assets.logo1} className='w-28 lg:w-32' alt="Logo"/>
+      <img src={assets.logo1} className='w-20 lg:w-30 rounded-full' alt="Logo"/>
       </Link>
       <div className='flex items-center gap-5 text-gray-500 relative'>
         <p>Hi! {user ? user.fullName : 'Developers'}</p>

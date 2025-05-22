@@ -43,7 +43,7 @@ const NavBar = () => {
       }`}
     >
       <img onClick={() => navigate('/')}
-       src={assets.logo1} alt="" className="w-28 lg:w-32 cursor-pointer" />
+       src={assets.logo1} alt="" className="w-20 lg:w-20 cursor-pointer rounded-full" />
       <div className="hidden md:flex items-center gap-5 text-gray-500">
         <div className="flex items-center gap-5">
           {user && (
