@@ -60,7 +60,7 @@ const StudentsEnrolled = () => {
                     className="w-9 h-9 rounded-full"
                     alt=""
                   />
-                  <span className="truncate">{item.student.name}</span>
+                  <span className="truncate">{item.student.name || "user"}</span>
                 </td>
                 <td className="px-4 py-3 truncate">{item.courseTitle}</td>
                 <td className="px-4 py-3 hidden sm:table-cell">
