@@ -16,7 +16,6 @@ const CourseDetailes = () => {
   const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
   const [playerData, setPlayerData] = useState(null);
   const {
-    allCourses,
     calculateRating,
     calculateChapterTime,
     calculateCourseDuration,
